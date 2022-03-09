@@ -1,3 +1,41 @@
+* {
+    box-sizing: border-box;
+}
 body {
+    margin: 0;
+    display: block;
+    grid-template-rows: 2;
+    grid-template-columns: 2;
     background-color: red;
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.deck {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 50px;
+    margin: 25px;
+    font-size: 30px;
+    text-align: center;
+
+}
+
+.player-deck {
+    background-color: pink;
+}
+
+.card-slot {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 40%;
+    margin-right: 40%;
+
 }
