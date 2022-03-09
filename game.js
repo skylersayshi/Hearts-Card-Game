@@ -18,9 +18,6 @@ class Deck {
     };
 };
 
-
-
-
 class Card {
     constructor(suit, value) {
         this.suit = suit
@@ -43,10 +40,30 @@ const deck = new Deck();
 function dealCards(){
     deck.shuffleCards();
     computer1Cards = deck.cards.splice(0, 13);
+        // console.log(computer1Cards);
+        for(let i = 0; i<computer1Cards.length; i++){
+        c1Hand.innerHTML += (computer1Cards[i].value + computer1Cards[i].suit)
+        }
     computer2Cards = deck.cards.splice(0, 13);
+        for(let i = 0; i<computer1Cards.length; i++){
+            c2Hand.innerHTML += (computer2Cards[i].value + computer2Cards[i].suit)
+        }
     computer3Cards = deck.cards.splice(0, 13);
+        for(let i = 0; i<computer1Cards.length; i++){
+            c3Hand.innerHTML += (computer3Cards[i].value + computer3Cards[i].suit)
+        }
     playerCards = deck.cards.splice(0, 13);
+        for(let i = 0; i<computer1Cards.length; i++){
+            playerHand.innerHTML += (playerCards[i].value + playerCards[i].suit)
+        }
  };
 
-dealCards();
-console.log(computer1Cards.length);
+// Cache the DOM and Add Event Listeners
+
+dealButton = document.querySelector('.deal');
+c1Hand = document.querySelector('#hand-c1');
+c2Hand = document.querySelector('#hand-c2');
+c3Hand = document.querySelector('#hand-c3');
+playerHand = document.querySelector('#hand-player');
+
+dealButton.addEventListener('click', dealCards);

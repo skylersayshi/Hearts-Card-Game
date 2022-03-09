@@ -9,21 +9,29 @@
 </head>
 <body>
     <h1>HEARTS</h1>
-    <script src="game.js"></script>
     <div class="players-grid">
-        <div class="computer-deck deck">13
-            <div class = "card-slot">8♠</div>
+        <div class="computer-deck deck">
+            <p class="player">Computer 1</p>
+            <p class="number-cards-in-hand" id="c1-number-cards"></p>
+            <div class = "card-slot" id="hand-c1"></div>
         </div>
-        <div class="computer-deck deck">13
-            <div class = "card-slot">8♠</div>
+        <div class="computer-deck deck">
+            <p class="player">Computer 2</p>
+            <p class="number-cards-in-hand" id="c2-number-cards"></p>
+            <div class = "card-slot" id="hand-c2"></div>
         </div>
-            
-        <div class="computer-deck deck">13
-            <div class = "card-slot">8♠</div>
+        <div class="computer-deck deck">
+            <p class="player">Computer 3</p>
+            <p class="number-cards-in-hand" id="c3-number-cards"></p>
+            <div class = "card-slot" id="hand-c3"></div>
         </div>
-        <div class="player-deck deck">13
-            <div class = "card-slot player-card">8♠</div>
+        <div class="player-deck deck">
+            <p class="player">Player</p>
+            <p class="number-cards-in-hand" id="player-number-cards"></p>
+            <div class = "card-slot" id="hand-player"></div>
         </div>
     </div>
+    <h2 class="deal">DEAL</h2>
+    <script src="game.js"></script>
 </body>
 </html>
