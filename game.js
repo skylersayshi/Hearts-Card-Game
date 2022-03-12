@@ -56,7 +56,7 @@ function insertionSort(inputArr) {
 function dealCards(){
     deck.shuffleCards();
     computer1Cards = deck.cards.splice(0, 13);
-        computer1Cards.sort((a,b)=> (a.suit.localeCompare(b.suit) || a.value - b.value ));
+        // computer1Cards.sort((a,b)=> (a.suit.localeCompare(b.suit) || a.value - b.value ));
         for(let i = 0; i<computer1Cards.length; i++){
         c1Hand.innerHTML += (computer1Cards[i].value + computer1Cards[i].suit)
         }
@@ -70,8 +70,12 @@ function dealCards(){
         }
     playerCards = deck.cards.splice(0, 13);
         for(let i = 0; i<computer1Cards.length; i++){
+            playerCards.sort((a,b)=> (a.suit.localeCompare(b.suit) || a.value - b.value ));
 
             playerHand.innerHTML += (playerCards[i].value + playerCards[i].suit)
+            //testing
+            const newDiv = document.createElement("div");
+
         }
  };
 
@@ -90,3 +94,9 @@ dealButton.addEventListener('click', dealCards);
 //adjust deal function to create element for every item within hand so that each item can be individually selected
 //
 
+function playRound(){
+    //if any player has the 2 of clubs, play that card
+    //put card in middle of table
+    //every other player in clockwise rotation must play a club if they have one. lowest club possible. If no club, play highest card possible
+    //once all 4 cards are in the middle 
+}
