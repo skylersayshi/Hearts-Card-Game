@@ -37,22 +37,6 @@ function makeNewDeck(){
 
 const deck = new Deck();
 
-function insertionSort(inputArr) {
-    let n = inputArr.length;
-        for (let i = 1; i < n; i++) {
-            // Choosing the first element in our unsorted subarray
-            let current = inputArr[i];
-            // The last element of our sorted subarray
-            let j = i-1; 
-            while ((j > -1) && (current < inputArr[j])) {
-                inputArr[j+1] = inputArr[j];
-                j--;
-            }
-            inputArr[j+1] = current;
-        }
-    return inputArr;
-}
-
 function dealCards(){
     deck.shuffleCards();
     computer1Cards = deck.cards.splice(0, 13);
@@ -71,15 +55,15 @@ function dealCards(){
     playerCards = deck.cards.splice(0, 13);
         for(let i = 0; i<computer1Cards.length; i++){
             playerCards.sort((a,b)=> (a.suit.localeCompare(b.suit) || a.value - b.value ));
-
-            playerHand.innerHTML += (playerCards[i].value + playerCards[i].suit)
-            //testing
-            const newDiv = document.createElement("div");
-
+            function createPlayerHand(cards){
+                let card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = playerCards[i].value + playerCards[i].suit;
+                return card;
+            }
+            playerHand.appendChild(createPlayerHand());
         }
  };
-
- 
 
 // Cache the DOM and Add Event Listeners
 
@@ -90,13 +74,4 @@ c3Hand = document.querySelector('#hand-c3');
 playerHand = document.querySelector('#hand-player');
 
 dealButton.addEventListener('click', dealCards);
-
-//adjust deal function to create element for every item within hand so that each item can be individually selected
-//
-
-function playRound(){
-    //if any player has the 2 of clubs, play that card
-    //put card in middle of table
-    //every other player in clockwise rotation must play a club if they have one. lowest club possible. If no club, play highest card possible
-    //once all 4 cards are in the middle 
-}
+    
