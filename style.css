@@ -48,3 +48,11 @@ h2 {
 .card {
     color: red;
 }
+
+.pot{
+    color: green;
+}
+
+.deck{
+    font-size: 20px;
+}
