@@ -54,7 +54,8 @@ c2Points = document.querySelector('.c2-points');
 c3Points = document.querySelector('.c3-points');
 playerPoints = document.querySelector('.player-points');
 messageBoard = document.querySelector('.message-board');
-const cardChoice = document.querySelectorAll('.card')
+
+cardChoice = document.querySelectorAll('.card')
 
 deck.shuffleCards();
 
@@ -67,7 +68,7 @@ pPointsJS = 0;
     let computer1Cards = deck.cards.splice(0, 13);
     let computer2Cards = deck.cards.splice(0, 13);
     let computer3Cards = deck.cards.splice(0, 13);
-    let playerCards = deck.cards.splice(0, 13);
+    let playerCards = deck.cards.splice(0, 13).sort((a,b)=> (a.suit.localeCompare(b.suit) || a.value - b.value ));
 // ALREADY PLAYED CARDS BY EACH PLAYER
     let c1Deleted = [];
     let c2Deleted = [];
@@ -89,16 +90,28 @@ function dealCards(){
         c3Hand.innerHTML += (computer3Cards[i].value + computer3Cards[i].suit)
     }
     for(let i = 0; i<playerCards.length; i++){
-        playerCards.sort((a,b)=> (a.suit.localeCompare(b.suit) || a.value - b.value ));
-        function createPlayerHand(cards){
-            let card = document.createElement('div');
-            card.classList.add('card');
-            card.innerHTML = playerCards[i].value + playerCards[i].suit;
-
-            return card;
+            function createPlayerHand(cards){
+                let card = document.createElement('div');
+                card.classList.add('card');
+                card.setAttribute("id", `${i}`)
+                card.innerHTML = faceCards(playerCards[i].value) + playerCards[i].suit;
+                return card;
+            }
+            playerHand.appendChild(createPlayerHand(playerCards[i].value + playerCards[i].suit));
         }
-        playerHand.appendChild(createPlayerHand(playerCards[i].value + playerCards[i].suit));
-    }
+        cardChoice = document.querySelectorAll('.card')
+        cardChoice.forEach(card => {
+            card.addEventListener('click', () =>{
+                pot.push(playerCards[card.id]);
+                playerPot.innerHTML+=card.innerHTML
+                pDeleted.push(playerCards[card.id]);
+                card.parentNode.removeChild(card);
+                spliceCard(playerCards[card.id], playerCards);
+                playCardFromHand();
+                playCardFromHand();
+                playCardFromHand();
+                });
+            });
 };
 
 dealButton.addEventListener('click', playGame);
@@ -117,7 +130,7 @@ function firstRound(){
         if(computer2Cards[i].suit === "♣" && computer2Cards[i].value === "2"){
             pot2.innerHTML += computer2Cards[i].value + computer2Cards[i].suit;
             pot.push(computer2Cards[i]);
-            c2Deleted.push(computer1Cards[i]);
+            c2Deleted.push(computer2Cards[i]);
             computer2Cards.splice(i,1);
         }
     }
@@ -126,7 +139,7 @@ function firstRound(){
         if(computer3Cards[i].suit === "♣" && computer3Cards[i].value === "2"){
             pot3.innerHTML += computer3Cards[i].value + computer3Cards[i].suit;
             pot.push(computer3Cards[i]);
-            c3Deleted.push(computer1Cards[i]);
+            c3Deleted.push(computer3Cards[i]);
             computer3Cards.splice(i,1);
         }
     }
@@ -135,7 +148,7 @@ function firstRound(){
         if(playerCards[i].suit === "♣" && playerCards[i].value === "2"){
             playerPot.innerHTML += playerCards[i].value + playerCards[i].suit;
             pot.push(playerCards[i]);
-            pDeleted.push(computer1Cards[i]);
+            pDeleted.push(playerCards[i]);
             playerCards.splice(i,1);
         }
     }
@@ -146,7 +159,6 @@ function firstRound(){
 };
 
 function playCardFromHand(){
-    while(pot.length<4) {
         if(computer1Cards.length<computer2Cards.length){
             let cardPlayed = getRandomCard(computer2Cards);
             pot.push(cardPlayed); 
@@ -165,14 +177,9 @@ function playCardFromHand(){
             spliceCard(cardPlayed, computer3Cards);
             // c3Hand.innerHTML = computer3Cards.length;
         }
-        if(computer3Cards.length<playerCards.length){
-            let cardPlayed = getRandomCard(playerCards);
-            pot.push(cardPlayed);
-            playerPot.innerHTML+=faceCards(cardPlayed.value) + cardPlayed.suit;
-            pDeleted.push(cardPlayed);
-            spliceCard(cardPlayed, playerCards);
-            // playerPlaysCard();
-        }
+        // if(computer3Cards.length<playerCards.length){
+        //     console.log('test')
+        // }
         if(playerCards.length<computer1Cards.length){
             let cardPlayed = getRandomCard(computer1Cards);
             pot.push(cardPlayed);
@@ -180,7 +187,66 @@ function playCardFromHand(){
             c1Deleted.push(cardPlayed);
             spliceCard(cardPlayed, computer1Cards);
         }
-    }
+        if(computer1Cards.length<computer2Cards.length){
+            let cardPlayed = getRandomCard(computer2Cards);
+            pot.push(cardPlayed); 
+            pot2.innerHTML+=faceCards(cardPlayed.value) + cardPlayed.suit;
+            c2Deleted.push(cardPlayed);
+            spliceCard(cardPlayed, computer2Cards);
+            // computer2Cards.splice(cardPlayed,1);
+            // c2Hand.innerHTML -= cardPlayed.value + cardPlayed.suit;
+        }
+        if(computer2Cards.length<computer3Cards.length){
+            let cardPlayed = getRandomCard(computer3Cards);
+            pot.push(cardPlayed);
+            pot3.innerHTML+=faceCards(cardPlayed.value) + cardPlayed.suit;
+            c3Deleted.push(cardPlayed);
+            // computer3Cards.splice(cardPlayed,1);
+            spliceCard(cardPlayed, computer3Cards);
+            // c3Hand.innerHTML = computer3Cards.length;
+        }
+        // if(computer3Cards.length<playerCards.length){
+        //     console.log('test')
+        // }
+        if(playerCards.length<computer1Cards.length){
+            let cardPlayed = getRandomCard(computer1Cards);
+            pot.push(cardPlayed);
+            pot1.innerHTML+=faceCards(cardPlayed.value) + cardPlayed.suit;
+            c1Deleted.push(cardPlayed);
+            spliceCard(cardPlayed, computer1Cards);
+        }
+        if(computer1Cards.length<computer2Cards.length){
+            let cardPlayed = getRandomCard(computer2Cards);
+            pot.push(cardPlayed); 
+            pot2.innerHTML+=faceCards(cardPlayed.value) + cardPlayed.suit;
+            c2Deleted.push(cardPlayed);
+            spliceCard(cardPlayed, computer2Cards);
+            // computer2Cards.splice(cardPlayed,1);
+            // c2Hand.innerHTML -= cardPlayed.value + cardPlayed.suit;
+        }
+        if(computer2Cards.length<computer3Cards.length){
+            let cardPlayed = getRandomCard(computer3Cards);
+            pot.push(cardPlayed);
+            pot3.innerHTML+=faceCards(cardPlayed.value) + cardPlayed.suit;
+            c3Deleted.push(cardPlayed);
+            // computer3Cards.splice(cardPlayed,1);
+            spliceCard(cardPlayed, computer3Cards);
+            // c3Hand.innerHTML = computer3Cards.length;
+        }
+        // if(computer3Cards.length<playerCards.length){
+        //     console.log('test')
+        // }
+        if(playerCards.length<computer1Cards.length){
+            let cardPlayed = getRandomCard(computer1Cards);
+            pot.push(cardPlayed);
+            pot1.innerHTML+=faceCards(cardPlayed.value) + cardPlayed.suit;
+            c1Deleted.push(cardPlayed);
+            spliceCard(cardPlayed, computer1Cards);
+        }
+    // console.log(c1Deleted);
+    // console.log(c2Deleted);
+    // console.log(c3Deleted);
+    // console.log(pDeleted);
 };
 
 function addPoints(){
@@ -309,14 +375,14 @@ function playGame(){
     playCardFromHand();
     addPoints();
     givePoints();
-    newHandParameters();
-    nextHand();
-    addPoints();
-    givePoints();
-    newHandParameters();
-    nextHand();
-    addPoints();
-    givePoints();
+    // newHandParameters();
+    // nextHand();
+    // addPoints();
+    // givePoints();
+    // newHandParameters();
+    // nextHand();
+    // addPoints();
+    // givePoints();
     // newHandParameters();
     // nextHand();
     // newHandParameters();
@@ -375,8 +441,7 @@ function spliceCard(card, array){
 };
 
 function playerPlaysCard(){
-    const cardChoice = document.querySelectorAll('.card')
-            cardChoice.forEach(card => {
+    cardChoice.forEach(card => {
             cardChoice.addEventListener('click', () =>{
                 pot.push(cardChoice);
                 pot1.innerHTML+=faceCards(cardChoice.value) + cardChoice.suit;
