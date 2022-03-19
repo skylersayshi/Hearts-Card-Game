@@ -105,7 +105,7 @@ function dealCards(){
 
 ////TESTING__________________________
 //add delay
-var delayInMilliseconds = 1000;
+var delayInMilliseconds = 500;
 
 for(let i = 0; i<playerCards.length; i++){
     function createPlayerHand(cards){
@@ -203,7 +203,7 @@ function playCardFromHand(){ //MAJOR PROBLEMS
         if(playerCards.length<computer1Cards.length && pot.length<4 && computer1Cards.length>=playerCards.length){
             let cardPlayed = getRandomCard(computer1Cards);
             pot.push(cardPlayed);
-            pot1.innerHTML += faceCards(cardPlayed.value) + cardPlayed.suit;
+            setTimeout(function() {pot1.innerHTML += faceCards(cardPlayed.value) + cardPlayed.suit},delayInMilliseconds);
             // suitColor(pot1);
             c1Deleted.push(cardPlayed);
             spliceCard(cardPlayed, computer1Cards);
@@ -213,7 +213,7 @@ function playCardFromHand(){ //MAJOR PROBLEMS
             // console.log('condition 2');
             let cardPlayed = getRandomCard(computer2Cards);
             pot.push(cardPlayed); 
-            pot2.innerHTML+=faceCards(cardPlayed.value) + cardPlayed.suit;
+            setTimeout(function() {pot2.innerHTML += faceCards(cardPlayed.value) + cardPlayed.suit},delayInMilliseconds);
             c2Deleted.push(cardPlayed);
             spliceCard(cardPlayed, computer2Cards);
             // computer2Cards.splice(cardPlayed,1);
@@ -224,7 +224,7 @@ function playCardFromHand(){ //MAJOR PROBLEMS
             // console.log('condition 3');
             let cardPlayed = getRandomCard(computer3Cards);
             pot.push(cardPlayed);
-            pot3.innerHTML+=faceCards(cardPlayed.value) + cardPlayed.suit;
+            setTimeout(function() {pot3.innerHTML += faceCards(cardPlayed.value) + cardPlayed.suit},delayInMilliseconds);
             c3Deleted.push(cardPlayed);
             // computer3Cards.splice(cardPlayed,1);
             spliceCard(cardPlayed, computer3Cards);
@@ -273,8 +273,8 @@ function getRandomCard(player){
             const randomCard = Math.floor(Math.random() * player.length);
             const item = player[randomCard];
             return item  
-        } 
-};
+        }
+    }
 
 function getRandomCard2(player){
     const randomCard = Math.floor(Math.random() * player.length);
@@ -346,7 +346,7 @@ function nextHand(){ //includes new hand parameters
     if(nextHandStarter === "c1"){
         let cardPlayed1 = getRandomCard2(computer1Cards);
             pot.push(cardPlayed1);
-            pot1.innerHTML+=faceCards(cardPlayed1.value) + cardPlayed1.suit;
+            setTimeout(function(){pot1.innerHTML+=faceCards(cardPlayed1.value) + cardPlayed1.suit},delayInMilliseconds);
             c1Deleted.push(cardPlayed1);
             initialSuit = cardPlayed1.suit;
             // computer1Cards.splice(cardPlayed1,1);
@@ -360,7 +360,7 @@ function nextHand(){ //includes new hand parameters
     if(nextHandStarter === "c2"){
         let cardPlayed2 = getRandomCard2(computer2Cards);
             pot.push(cardPlayed2); 
-            pot2.innerHTML+=faceCards(cardPlayed2.value) + cardPlayed2.suit;
+            setTimeout(function(){pot2.innerHTML+=faceCards(cardPlayed2.value) + cardPlayed2.suit},delayInMilliseconds);
             c2Deleted.push(cardPlayed2);
             initialSuit = cardPlayed2.suit;
             spliceCard(cardPlayed2,computer2Cards);
@@ -369,7 +369,7 @@ function nextHand(){ //includes new hand parameters
     if(nextHandStarter === "c3"){
         let cardPlayed3 = getRandomCard2(computer3Cards);
             pot.push(cardPlayed3);
-            pot3.innerHTML+=faceCards(cardPlayed3.value) + cardPlayed3.suit;
+            setTimeout(function(){pot3.innerHTML+=faceCards(cardPlayed3.value) + cardPlayed3.suit},delayInMilliseconds);
             c3Deleted.push(cardPlayed3);
             initialSuit = cardPlayed3.suit;
             // computer3Cards.splice(cardPlayed3,1);
@@ -468,4 +468,10 @@ function suitColor(item){
     if(item.innerHTML.charAt(1) === "♥" || item.innerHTML.charAt(1) === "♦"){
         item.style.color = 'red';
     }
+}
+
+function delay(item){
+    setTimeout(function(){
+        item
+    },delayInMilliseconds);
 }
