@@ -30,3 +30,16 @@ Each player must follow suit if possible. If a player is void of the suit led, a
 * HTML
 * CSS
 
+## User Stories
+* User can play any card at the start of a round
+* User can play the same suit of the first card played by a computer from the round
+
+## Features
+* Plays one round of Hearts
+* Fast-play
+* Counts scores of all players
+
+## Major Hurdles
+* Allow each computer to play in turn, including at the start of a round
+* Command each computer to play the initial suit of the round if available
+* Determine the amount of hearts played in a hand and which player to give them to
