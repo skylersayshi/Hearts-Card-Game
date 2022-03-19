@@ -1,16 +1,6 @@
 // CONSTRUCTING THE DECK OF CARDS
 
 
-///add points
-///give points
-///new hand parameters
-///new hand
-
-
-
-
-
-
 const suits = ["♣", "♥", "♠" , "♦"];
 const values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"];
 
@@ -106,7 +96,6 @@ function dealCards(){
     }
 };
 
-////TESTING__________________________
 //add delay
 var delayInMilliseconds = 500;
 var delay3Seconds = 3000;
@@ -135,11 +124,7 @@ cardChoice.forEach(card => {
         pDeleted.push(playerCards[card.id]);
         card.parentNode.removeChild(card);
         spliceCard(playerCards[card.id], playerCards);
-        // finishRound();
-        // console.log('PLAYER ARRAY LENGTH: ' + playerCards.length);
-        // console.log('C1ARRAYLENGTH: '+ computer1Cards.length)
-
-        //testing
+    
         for(let i = 0; i<playerCards.length; i++){
             document.getElementsByClassName("card")[i].removeAttribute("id");
             document.getElementsByClassName("card")[i].setAttribute("id", `${i}`);
@@ -149,7 +134,7 @@ cardChoice.forEach(card => {
 
 dealButton.addEventListener('click', playGame);
 
-function firstRound(){ //no problems
+function firstRound(){
     for(let i = 0; i<computer1Cards.length; i++){
         if(computer1Cards[i].suit === "♣" && computer1Cards[i].value === "2"){
             pot1.innerHTML += computer1Cards[i].value + computer1Cards[i].suit;
@@ -185,41 +170,25 @@ function firstRound(){ //no problems
 
     for(let i = 0; i<playerCards.length; i++){
         if(playerCards[i].suit === "♣" && playerCards[i].value === "2"){
-            // playerPot.innerHTML += playerCards[i].value + playerCards[i].suit;
-            // pot.push(playerCards[i]);
-            // pDeleted.push(playerCards[i]);
-            // playerCards.splice(i,1);
             initialSuit = playerCards[i].suit;
             alert ('play 2 of clubs')
         }
     }
 
     finishRound();
-    // addPoints();
-    // givePoints();
 };
 
-function playCardFromHand(){ //MAJOR PROBLEMS
-
-    //testing
-    // console.log('playcardfromhand -- function');
-    // console.log('computer 1 length:' + computer1Cards.length)
-    // console.log('computer 2 length:' + computer2Cards.length)
-    // console.log('computer 3 length:' + computer3Cards.length)
-    // console.log('player length' + playerCards.length)
-    // console.log('pot length:' + pot.length)
+function playCardFromHand(){
         if(playerCards.length<computer1Cards.length && pot.length<4 && computer1Cards.length>=playerCards.length){
             let cardPlayed = getRandomCard(computer1Cards);
             pot.push(cardPlayed);
             pot1.innerHTML += faceCards(cardPlayed.value) + cardPlayed.suit
             suitColor(pot1)
-            // suitColor(pot1);
             c1Deleted.push(cardPlayed);
             spliceCard(cardPlayed, computer1Cards);
             finishRound();
         }
         if(computer1Cards.length<computer2Cards.length && pot.length<4 && computer2Cards.length>=playerCards.length){
-            // console.log('condition 2');
             let cardPlayed = getRandomCard(computer2Cards);
             pot.push(cardPlayed); 
             pot2.innerHTML += faceCards(cardPlayed.value) + cardPlayed.suit
@@ -231,34 +200,17 @@ function playCardFromHand(){ //MAJOR PROBLEMS
             finishRound();
         }
         if(computer2Cards.length<computer3Cards.length && pot.length<4 && computer3Cards.length>=playerCards.length){
-            // console.log('condition 3');
             let cardPlayed = getRandomCard(computer3Cards);
             pot.push(cardPlayed);
             pot3.innerHTML += faceCards(cardPlayed.value) + cardPlayed.suit
             suitColor(pot3)
             c3Deleted.push(cardPlayed);
-            // computer3Cards.splice(cardPlayed,1);
             spliceCard(cardPlayed, computer3Cards);
-            // c3Hand.innerHTML = computer3Cards.length;
             finishRound();
         }
-        // console.log('end of:');
-        // console.log('playcardfromhand -- function');
-        // console.log('computer 1 length:' + computer1Cards.length)
-        // console.log('computer 2 length:' + computer2Cards.length)
-        // console.log('computer 3 length:' + computer3Cards.length)
-        // console.log('player length' + playerCards.length)
-        // console.log('pot length:' + pot.length)
 };
 
 function addPoints(){
-    // console.log('ADD POINTS====================================')
-    // console.log('computer 1 length:' + computer1Cards.length)
-    // console.log('computer 2 length:' + computer2Cards.length)
-    // console.log('computer 3 length:' + computer3Cards.length)
-    // console.log('player length:' + playerCards.length)
-    // console.log('pot length:' + pot.length)
-
     for(let i = 0; i<pot.length; i++){
         if(pot[i].suit === "♥"){
             potPoints++;
@@ -294,12 +246,6 @@ function getRandomCard2(player){
 } // use for new hand only
 
 function givePoints(){ //creates next hand starter and adds points
-    // console.log('GIVE POINTS====================================')
-    // console.log('computer 1 length:' + computer1Cards.length)
-    // console.log('computer 2 length:' + computer2Cards.length)
-    // console.log('computer 3 length:' + computer3Cards.length)
-    // console.log('player length' + playerCards.length)
-    // console.log('pot length:' + pot.length)
     for(let i = 0; i<pot.length; i++){
         if(pot[i].suit === initialSuit && pot.length === 4){
             potValues.push(pot[i].value)
@@ -317,43 +263,30 @@ function givePoints(){ //creates next hand starter and adds points
                 c1PointsJS = c1PointsJS + potPoints;
                 c1Points.innerHTML = c1PointsJS;
                 nextHandStarter = "c1"
-                // return nextHandStarter
-                // console.log('COMPUTER 1 POINTS: ' + )
             }
             if (potValues[i] == highestCard && c2Deleted[j] == pot[i]){
                 messageBoard.innerHTML = "Computer 2 takes this hand with " + faceCards(pot[i].value) + pot[i].suit;
                 c2PointsJS = c2PointsJS + potPoints;
                 c2Points.innerHTML = c2PointsJS;
                 nextHandStarter = "c2"
-                // return nextHandStarter
             }
             if (potValues[i] == highestCard && c3Deleted[j] == pot[i]){
                 messageBoard.innerHTML = "Computer 3 takes this hand with " + faceCards(pot[i].value) + pot[i].suit;;
                 c3PointsJS = c3PointsJS + potPoints;
                 c3Points.innerHTML = c3PointsJS;
                 nextHandStarter = "c3"
-                // return nextHandStarter
             }
             if (potValues[i] == highestCard && pDeleted[j] == pot[i]){
                 messageBoard.innerHTML = "You took this hand with " + faceCards(pot[i].value) + pot[i].suit + ". PLAY NEXT CARD";;
                 pPointsJS = pPointsJS + potPoints;
                 playerPoints.innerHTML = pPointsJS;
                 nextHandStarter = "player"
-                // return nextHandStarter
             }
         }
     }
 };
 
 function nextHand(){ //includes new hand parameters
-
-    // console.log('NEXT HAND====================================')
-    // console.log('computer 1 length:' + computer1Cards.length)
-    // console.log('computer 2 length:' + computer2Cards.length)
-    // console.log('computer 3 length:' + computer3Cards.length)
-    // console.log('player length' + playerCards.length)
-    // console.log('pot length:' + pot.length)
-
     if(nextHandStarter === "c1"){
         let cardPlayed1 = getRandomCard2(computer1Cards);
             pot.push(cardPlayed1);
@@ -361,13 +294,7 @@ function nextHand(){ //includes new hand parameters
             suitColor(pot1)
             c1Deleted.push(cardPlayed1);
             initialSuit = cardPlayed1.suit;
-            // computer1Cards.splice(cardPlayed1,1);
             spliceCard(cardPlayed1,computer1Cards);
-            // finishRound();
-            // console.log('c1 ===========================')
-            // console.log(pot);
-            // console.log(initialSuit);
-            // console.log(computer1Cards.length)
     }
     if(nextHandStarter === "c2"){
         let cardPlayed2 = getRandomCard2(computer2Cards);
@@ -377,7 +304,6 @@ function nextHand(){ //includes new hand parameters
             c2Deleted.push(cardPlayed2);
             initialSuit = cardPlayed2.suit;
             spliceCard(cardPlayed2,computer2Cards);
-            // finishRound();
     }
     if(nextHandStarter === "c3"){
         let cardPlayed3 = getRandomCard2(computer3Cards);
@@ -386,9 +312,7 @@ function nextHand(){ //includes new hand parameters
             suitColor(pot3)
             c3Deleted.push(cardPlayed3);
             initialSuit = cardPlayed3.suit;
-            // computer3Cards.splice(cardPlayed3,1);
             spliceCard(cardPlayed3,computer3Cards);
-            // finishRound();
     }
     if(nextHandStarter === "player"){
         
@@ -398,18 +322,11 @@ function nextHand(){ //includes new hand parameters
 };
 
 function newHandParameters(){
-    // console.log('NEW HAND PARAMETERS====================================')
-    // console.log('computer 1 length:' + computer1Cards.length)
-    // console.log('computer 2 length:' + computer2Cards.length)
-    // console.log('computer 3 length:' + computer3Cards.length)
-    // console.log('player length' + playerCards.length)
-    // console.log('pot length:' + pot.length)
 
     pointsInPot.innerHTML = 0
     potPoints = 0;
     const empty = arr => arr.length = 0;
     empty(pot);
-    // pot.splice(0,4);
     potValues.splice(0,4);
     c1Deleted.splice(0,1);
     c2Deleted.splice(0,1);
@@ -450,7 +367,6 @@ function spliceCard(card, array){
 
 function finishRound(){
     if(pot.length < 4){
-        // return playCardFromHand()
         playCardFromHand()
     }
 
@@ -475,17 +391,8 @@ function finishRound(){
 
         newHandParameters()
         nextHand()
-        // console.log(playerCards.length)
-        // console.log(computer1Cards.length)
-        // console.log(computer2Cards.length)
-        // console.log(computer3Cards.length)
     }
 };
-
-// console.log(pDeleted)
-// console.log(c1Deleted)
-// console.log(c2Deleted)
-// console.log(c3Deleted)
 
 function suitColor(item){
     if(item.innerHTML.charAt(1) === "♣" || item.innerHTML.charAt(1) === "♠"){
@@ -500,6 +407,5 @@ function winGame(){
     if(playerCards.length === 0 && computer1Cards.length === 0 && computer2Cards.length === 0 && computer3Cards.length === 0){
     console.log('game over');
     }
-
-    }
-    winGame();
+}
+winGame();
