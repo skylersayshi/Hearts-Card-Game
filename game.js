@@ -290,7 +290,7 @@ function nextHand(){ //includes new hand parameters
     if(nextHandStarter === "c1"){
         let cardPlayed1 = getRandomCard2(computer1Cards);
             pot.push(cardPlayed1);
-            pot1.innerHTML+=faceCards(cardPlayed1.value) + cardPlayed1.suit
+            pot1.innerHTML=faceCards(cardPlayed1.value) + cardPlayed1.suit
             suitColor(pot1)
             c1Deleted.push(cardPlayed1);
             initialSuit = cardPlayed1.suit;
@@ -299,7 +299,7 @@ function nextHand(){ //includes new hand parameters
     if(nextHandStarter === "c2"){
         let cardPlayed2 = getRandomCard2(computer2Cards);
             pot.push(cardPlayed2); 
-            pot2.innerHTML+=faceCards(cardPlayed2.value) + cardPlayed2.suit
+            pot2.innerHTML=faceCards(cardPlayed2.value) + cardPlayed2.suit
             suitColor(pot2)
             c2Deleted.push(cardPlayed2);
             initialSuit = cardPlayed2.suit;
@@ -308,7 +308,7 @@ function nextHand(){ //includes new hand parameters
     if(nextHandStarter === "c3"){
         let cardPlayed3 = getRandomCard2(computer3Cards);
             pot.push(cardPlayed3);
-            pot3.innerHTML+=faceCards(cardPlayed3.value) + cardPlayed3.suit
+            pot3.innerHTML=faceCards(cardPlayed3.value) + cardPlayed3.suit
             suitColor(pot3)
             c3Deleted.push(cardPlayed3);
             initialSuit = cardPlayed3.suit;
