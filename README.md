@@ -4,7 +4,7 @@
 ![screenshot](images/SC.png "GAME")
 
 
-## [Play](https://erendn.github.io/solitaire-js/)
+## [Play](https://giantnerd123.github.io/Hearts-Card-Game/)
 
 
 ## Gameplay
