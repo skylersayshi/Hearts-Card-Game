@@ -30,5 +30,3 @@ Each player must follow suit if possible. If a player is void of the suit led, a
 * HTML
 * CSS
 
-## [Play](https://erendn.github.io/solitaire-js/)
-
