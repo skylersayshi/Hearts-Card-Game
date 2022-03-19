@@ -1,5 +1,8 @@
 body {
     text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(87,163,68,1) 32%, rgba(0,212,255,1) 100%);
 
 }
 .table {
@@ -12,7 +15,13 @@ body {
     border: 1px solid black;
     margin: 2%;
     margin-bottom: 5%;
+    border-radius: 10px;
 
+}
+.points{
+    text-align: left;
+    margin-left: 30px;
+    margin-top: 70px;
 }
 .player-deck{
     justify-content: center;
@@ -44,6 +53,7 @@ body {
    align-items: center;
    font-size: 1.5rem;
    cursor: pointer;
+   background-color: white;
 }
 .card::before,
 .card::after {
@@ -77,10 +87,15 @@ body {
     margin-bottom: 5%;
     padding-top: auto;
     padding-bottom: auto;
+    background-color: white;
 }
 
 .pot-player{
     position: relative;
     text-align: center;
     justify-content: center;
+}
+
+.player-points-title{
+    margin-left: 40%;
 }
